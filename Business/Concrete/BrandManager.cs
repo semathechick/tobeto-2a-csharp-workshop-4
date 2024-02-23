@@ -5,6 +5,7 @@ using Business.Requests.Brand;
 using Business.Responses.Brand;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete;
 
@@ -13,6 +14,7 @@ public class BrandManager : IBrandService
     private readonly IBrandDal _brandDal;
     private readonly BrandBusinessRules _brandBusinessRules;
     private readonly IMapper _mapper;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public BrandManager(IBrandDal brandDal, BrandBusinessRules brandBusinessRules, IMapper mapper)
     {
@@ -20,9 +22,14 @@ public class BrandManager : IBrandService
         _brandBusinessRules = brandBusinessRules;
         _mapper = mapper;
     }
-
+    //AOP => Aspect oriented Programming -Autofac
+    //Pipeline
     public AddBrandResponse Add(AddBrandRequest request)
     {
+        if(!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+            throw new Exception("Bu endpointi çalıştırmak için giriş yapmalısın.");
+        }
         // İş Kuralları
         _brandBusinessRules.CheckIfBrandNameNotExists(request.Name);
         //Authentication-Authorization(login / login?, role=>Admin?),JWT(headerda) ile bu bilgiler wepapide olusturulmus olan  jwt kimliği sorgulanır.=>Authentication-Authorization gerceklestirilir.

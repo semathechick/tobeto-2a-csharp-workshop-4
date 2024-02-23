@@ -1,14 +1,16 @@
 ﻿using Core.Entities;
+using DataAccess.Abstract.BaseDal;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.Security.JWT
+namespace DataAccess.Abstract
 {
-    public interface ITokenHelper
+    public interface IRoleDal: IEntityDalBase<Role, int>
     {
-        AccessToken CreateToken(User user, UserRole userRole);
+
     }
 }

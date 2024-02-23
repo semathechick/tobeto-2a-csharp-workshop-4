@@ -57,9 +57,15 @@ public static class ServiceCollectionBusinessExtension
             .AddScoped<ITokenHelper,JwtTokenHelper>()
             .AddScoped<IUserDal, EfUserDal>();
 
-        //services
-        //   .AddScoped<IIndividualCustomerService, IndividualCustomerManager>()
-        //   .AddScoped<IIndividualCustomerDal, EfIndividualCustomerDal>();
+        services
+            .AddScoped<IIndividualCustomerService, IndividualCustomerManager>()
+            .AddScoped<IIndividualCustomerDal, EfIndividualCustomerDal>();
+
+        services
+            .AddScoped<IUserRoleService, UserRoleManager>()
+            .AddScoped<IUserRoleDal, EfUserRoleDal>();
+
+        services.AddScoped<IRoleDal, EfRoleDal>();  
 
         services.AddAutoMapper(Assembly.GetExecutingAssembly()); // AutoMapper.Extensions.Microsoft.DependencyInjection NuGet Paketi
         // Reflection yöntemiyle Profile class'ını kalıtım alan tüm class'ları bulur ve AutoMapper'a ekler.

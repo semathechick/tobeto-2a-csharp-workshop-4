@@ -9,18 +9,18 @@ namespace Entities.Concrete
 {
     public class Customer : Entity<int>
     {
-        public Customer(int ındividualCustomerId, int userId)
+        public Customer( int userId)
         {
-            IndividualCustomerId = ındividualCustomerId;
+            
             UserId = userId;
         }
-
-        public int IndividualCustomerId { get; set; }
+        public Customer() { }
+        
         public int UserId { get; set; }
 
 
         public User? User { get; set; } = null;
-        public IndividualCustomer? IndividualCustomer { get; set; } = null;
+        
         
 
 

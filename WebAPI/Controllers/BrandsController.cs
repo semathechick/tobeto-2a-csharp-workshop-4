@@ -64,3 +64,6 @@ public class BrandsController : ControllerBase
         }
     }
 }
+//mediatR, pipeline, cqrs--arastırma konusu
+//Auth&Authorization ekle sisteme
+//role implementasyonu => claimlere kullanıcı rollerini db'den ekleyip gelen istekte rol bazlı kontrol

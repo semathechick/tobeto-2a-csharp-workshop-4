@@ -12,8 +12,10 @@ public class RentACarContext : DbContext
     public DbSet<Model> Models { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Customer> Customers { get; set; }
-    //public DbSet<IndividualCustomer> IndividualCustomers { get; set; }
+    public DbSet<IndividualCustomer> IndividualCustomers { get; set; }
     public DbSet<Car> Cars { get; set; }
+    public DbSet<Role> Roles { get; set; } 
+    public DbSet<UserRole> UserRoles { get; set; }
 
     public RentACarContext(DbContextOptions dbContextOptions)
         : base(dbContextOptions) { }

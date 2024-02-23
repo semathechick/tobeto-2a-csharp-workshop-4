@@ -4,14 +4,6 @@ namespace Core.Entities
 {
     public class User : Entity<int>
     {
-        public User(string email, byte[] passwordHash, byte[] passwordSalt, bool approved)
-        {
-            
-            Email = email;
-            PasswordHash = passwordHash;
-            PasswordSalt = passwordSalt;
-            Approved = approved;
-        }
 
         //Genel User Fieldları
         public string Email { get; set; }
@@ -19,10 +11,27 @@ namespace Core.Entities
         public byte[] PasswordSalt { get; set; }
         public bool Approved { get; set; }
 
+        public ICollection<UserRole> UserRoles { get; set; }
         public User()
         {
 
         }
+
+        public User(string email, byte[] passwordHash, byte[] passwordSalt, bool approved)
+        {
+            Email = email;
+            PasswordHash = passwordHash;
+            PasswordSalt = passwordSalt;
+            Approved = approved;
+            
+        }
+
+        public User(ICollection<UserRole> userRoles)
+        {
+            UserRoles = userRoles;
+        }
+
+
 
 
         //abc123 => Plain Text olarak sifre tutulmaz.

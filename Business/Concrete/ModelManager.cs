@@ -10,6 +10,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete;
 
@@ -18,7 +19,7 @@ public class ModelManager : IModelService
     private readonly IModelDal _modelDal;
     private readonly ModelBusinessRules _modelBusinessRules;
     private readonly IMapper _mapper;
-
+    private readonly IHttpContextAccessor _httpContextAccessor;
     public ModelManager(IModelDal modelDal, ModelBusinessRules modelBusinessRules, IMapper mapper)
     {
         _modelDal = modelDal;
@@ -28,6 +29,10 @@ public class ModelManager : IModelService
 
     public AddModelResponse Add(AddModelRequest request)
     {
+        if (!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+            throw new Exception("Bu endpointi çalıştırmak için giriş yapmalısın.");
+        }
         // validation
         //if(request.BrandId == 0)
         //    throw new Exception("BrandId cannot be 0.");
